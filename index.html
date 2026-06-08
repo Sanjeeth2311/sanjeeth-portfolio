@@ -1,117 +1,964 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanjeeth S | PCB Design Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f9fafb; color: #333; }
-        .primary-color { color: #3b82f6; }
-        .primary-bg { background-color: #3b82f6; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sanjeeth S — PCB Designer & Embedded Systems Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #F5F0E8;
+      --warm-white: #FAFAF7;
+      --charcoal: #1A1A1A;
+      --deep: #0D0D0D;
+      --copper: #B87333;
+      --copper-light: #D4924A;
+      --copper-muted: #8A5A2A;
+      --text-muted: #6B6560;
+      --text-light: #9E9890;
+      --border: #D8D0C4;
+      --border-light: #EAE4DC;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Mono', monospace;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(250,250,247,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--copper); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3rem 5rem 4rem;
+      border-right: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--copper);
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--deep);
+      margin-bottom: 0.3rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--copper);
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-bio {
+      font-size: 0.8rem;
+      line-height: 1.9;
+      color: var(--text-muted);
+      max-width: 440px;
+      margin-bottom: 3rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 0.85rem 2rem;
+      background: var(--charcoal);
+      color: var(--cream);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--copper); transform: translateY(-1px); }
+    .btn-outline {
+      padding: 0.85rem 2rem;
+      background: transparent;
+      color: var(--charcoal);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-outline:hover { border-color: var(--copper); color: var(--copper); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 3rem;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-circuit {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      opacity: 0.06;
+    }
+    .hero-stats {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: auto;
+    }
+    .stat-item {
+      background: var(--cream);
+      padding: 2rem 1.5rem;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-num span { color: var(--copper); }
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .hero-quote {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      border-left: 2px solid var(--copper);
+      background: rgba(184,115,51,0.04);
+    }
+    .hero-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.6;
+    }
+    .hero-quote cite {
+      display: block;
+      margin-top: 0.8rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--copper);
+      font-style: normal;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 4rem; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .section-num {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: var(--copper);
+      font-family: 'DM Mono', monospace;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      color: var(--deep);
+      letter-spacing: -0.01em;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--cream); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 0.82rem;
+      line-height: 2;
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
+    }
+    .about-text p:first-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.7;
+    }
+    .about-details { display: flex; flex-direction: column; gap: 0; }
+    .detail-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 1rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border-light);
+      align-items: baseline;
+    }
+    .detail-key {
+      font-size: 0.63rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .detail-val {
+      font-size: 0.78rem;
+      color: var(--charcoal);
+      line-height: 1.6;
+    }
+    .detail-val a { color: var(--copper); text-decoration: none; }
+    .detail-val a:hover { text-decoration: underline; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--warm-white); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .skill-category {
+      background: var(--warm-white);
+      padding: 2.5rem 2rem;
+    }
+    .skill-cat-title {
+      font-size: 0.63rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .skill-cat-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .skill-tags { display: flex; flex-direction: column; gap: 0.5rem; }
+    .skill-tag {
+      font-size: 0.75rem;
+      color: var(--charcoal);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .skill-tag::before {
+      content: '—';
+      color: var(--copper);
+      font-size: 0.6rem;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--charcoal); }
+    #projects .section-title { color: var(--cream); }
+    #projects .section-num { color: var(--copper-light); }
+    #projects .section-line { background: #333; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: #2A2A2A;
+      border: 1px solid #2A2A2A;
+    }
+    .project-card {
+      background: var(--charcoal);
+      padding: 2.5rem;
+      transition: background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card:hover { background: #222; }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 0;
+      background: var(--copper);
+      transition: height 0.3s ease;
+    }
+    .project-card:hover::before { height: 100%; }
+    .project-num {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .project-desc {
+      font-size: 0.75rem;
+      line-height: 1.8;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .project-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid #333;
+      color: #666;
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--copper-light);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.8rem; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--cream); }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 180px; top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .timeline-date {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      padding-top: 0.2rem;
+    }
+    .timeline-content { padding-left: 3rem; }
+    .timeline-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 0.3rem;
+    }
+    .timeline-org {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--copper);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .timeline-desc {
+      font-size: 0.76rem;
+      line-height: 1.9;
+      color: var(--text-muted);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--warm-white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+    .contact-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--charcoal);
+      margin-bottom: 2rem;
+    }
+    .contact-intro em { color: var(--copper); font-style: italic; }
+    .contact-text {
+      font-size: 0.78rem;
+      line-height: 1.9;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 0; }
+    .contact-link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border-light);
+      text-decoration: none;
+      group: true;
+      transition: padding-left 0.2s;
+    }
+    .contact-link-row:hover { padding-left: 0.5rem; }
+    .contact-link-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .contact-link-value {
+      font-size: 0.8rem;
+      color: var(--charcoal);
+    }
+    .contact-link-arrow { color: var(--copper); font-size: 1rem; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-label {
+      font-size: 0.63rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .form-input, .form-textarea {
+      padding: 0.9rem 1rem;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--copper); }
+    .form-textarea { min-height: 120px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 4rem;
+      background: var(--deep);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: #555;
+      font-weight: 300;
+    }
+    .footer-copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #333;
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #444;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--copper); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+    .hero-name    { animation: fadeUp 0.6s ease 0.1s both; }
+    .hero-title   { animation: fadeUp 0.6s ease 0.2s both; }
+    .hero-bio     { animation: fadeUp 0.6s ease 0.3s both; }
+    .hero-actions { animation: fadeUp 0.6s ease 0.4s both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 4rem 1.5rem 3rem; border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-right { padding: 2rem 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .timeline-item::before { display: none; }
+      .timeline-content { padding-left: 0; }
+      footer { padding: 2rem 1.5rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12">
-        <div class="max-w-5xl mx-auto px-6">
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Sanjeeth S</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-            <!-- Profile Section -->
-            <div class="text-center mb-12 bg-white rounded-2xl shadow-lg p-10">
-                <div class="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl font-bold text-white">
-                    SS
-                </div>
-                <h1 class="text-5xl font-bold mb-2 text-gray-900">Sanjeeth S</h1>
-                <p class="text-xl text-blue-600 mb-4">PCB Design Engineer</p>
-                <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                    Dedicated Electronics and Communication Engineering student seeking a challenging career to leverage my technical skills and passion for innovation, contributing to cutting-edge technologies in electronics and embedded systems.
-                </p>
-                <div class="flex flex-wrap justify-center gap-6 mt-6 text-sm text-gray-600">
-                    <div class="flex items-center gap-2">📧 sanjeethsomu2004@gmail.com</div>
-                    <div class="flex items-center gap-2">📞 +91 8525816470</div>
-                    <div class="flex items-center gap-2">📍 Erode, India</div>
-                </div>
-                <div class="flex justify-center gap-6 mt-6 text-gray-600">
-                    <a href="https://github.com/Sanjeeth2311" class="hover:text-blue-600 font-medium">GitHub</a>
-                    <a href="https://www.linkedin.com/in/sanjeeth-s-854747279" class="hover:text-blue-600 font-medium">LinkedIn</a>
-                </div>
-            </div>
-
-            <!-- Skills Section -->
-            <div class="bg-white rounded-2xl shadow-lg p-10 mb-10">
-                <h2 class="text-3xl font-bold mb-6 text-center text-gray-900">Skills</h2>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-2 rounded-full text-sm font-medium">PCB Design</span>
-                    <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-2 rounded-full text-sm font-medium">HFSS</span>
-                    <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-2 rounded-full text-sm font-medium">KiCad</span>
-                    <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-2 rounded-full text-sm font-medium">Proteus</span>
-                    <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-2 rounded-full text-sm font-medium">C Programming</span>
-                    <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-2 rounded-full text-sm font-medium">Embedded Systems</span>
-                    <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-2 rounded-full text-sm font-medium">MS Office</span>
-                    <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-2 rounded-full text-sm font-medium">Service Engineer</span>
-                </div>
-            </div>
-
-            <!-- Projects Section -->
-            <div class="bg-white rounded-2xl shadow-lg p-10 mb-10">
-                <h2 class="text-3xl font-bold mb-6 text-center text-gray-900">Projects</h2>
-                <div class="grid gap-6 md:grid-cols-2">
-                    <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Helmet Controlled Ignition System</h3>
-                        <p class="text-gray-600">Developed an innovative helmet-based ignition control system enhancing road safety by ensuring helmet usage while riding.</p>
-                    </div>
-                    <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Helmet Controlled Ignition System with Alcohol Detection</h3>
-                        <p class="text-gray-600">Designed an advanced ignition system integrating helmet control and alcohol detection to prevent drunk driving and promote safer roads.</p>
-                    </div>
-                    <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Livestock Tracking & Health Monitoring</h3>
-                        <p class="text-gray-600">Wirelessly receives farm animal health and GPS data via nRF24L01, displays it on OLED, and updates Arduino IoT Cloud for remote monitoring of temperature, heartbeat, SpO2, and location.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Experience Section -->
-            <div class="bg-white rounded-2xl shadow-lg p-10 mb-10">
-                <h2 class="text-3xl font-bold mb-6 text-center text-gray-900">Experience</h2>
-                <div class="space-y-6">
-                    <div class="text-center border-b border-gray-200 pb-6 last:border-b-0">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Field Service Engineer</h3>
-                        <p class="text-blue-600 font-medium mb-2">Sine Square Electronics, Tiruppur</p>
-                        <p class="text-sm text-gray-500 mb-3">2023-2025</p>
-                        <p class="text-gray-600">Specialized in CCTV installation, maintenance, and troubleshooting. Responsibilities include diagnosing technical issues, resolving connectivity challenges, and providing clients with system setup guidance.</p>
-                    </div>
-                    <div class="text-center border-b border-gray-200 pb-6 last:border-b-0">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Embedded Systems Intern</h3>
-                        <p class="text-blue-600 font-medium mb-2">CODTECH IT SOLUTIONS</p>
-                        <p class="text-sm text-gray-500 mb-3"></p>
-                        <p class="text-gray-600">Gained practical experience in microcontroller programming, sensor interfacing, and real-time embedded applications. Focused on embedded C programming, hardware integration, and hands-on implementation.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Education Section -->
-            <div class="bg-white rounded-2xl shadow-lg p-10 mb-10">
-                <h2 class="text-3xl font-bold mb-6 text-center text-gray-900">Education</h2>
-                <div class="space-y-6">
-                    <div class="text-center border-b border-gray-200 pb-6 last:border-b-0">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">B.E - E.C.E</h3>
-                        <p class="text-green-600 font-medium mb-2">Velalar College of Engineering and Technology, Erode</p>
-                        <p class="text-sm text-gray-500">2022 - 2026</p>
-                    </div>
-                    <div class="text-center border-b border-gray-200 pb-6 last:border-b-0">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">HSC</h3>
-                        <p class="text-green-600 font-medium mb-2">Government Model Higher Secondary School, Getticheviyur</p>
-                        <p class="text-sm text-gray-500">2021 - 2022</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">PCB Designer &amp; Embedded Systems Engineer</p>
+    <h1 class="hero-name">Sanjeeth<br/><em>S.</em></h1>
+    <p class="hero-title">R&D Executive · Torque Lithium Energy Pvt Ltd</p>
+    <p class="hero-bio">
+      Electronics and Communication Engineering student with practical experience in PCB design, embedded systems, and IoT development. Skilled in circuit design, soldering techniques, and real-time microcontroller applications — focused on building reliable, efficient, and innovative electronic solutions.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
     </div>
+  </div>
+  <div class="hero-right">
+    <!-- Background circuit SVG -->
+    <svg class="hero-circuit" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#8A5A2A" stroke-width="1.5">
+        <path d="M20 100 H80 V60 H140 M140 60 V20 M140 60 H200"/>
+        <path d="M200 60 H260 V100 H320 V140"/>
+        <path d="M320 140 H360 V200 M320 140 V180 H280"/>
+        <path d="M80 200 H40 V260 H100 V300"/>
+        <path d="M100 300 H160 V340 H220 V380"/>
+        <path d="M220 380 H280 V420 H340 V460"/>
+        <path d="M160 200 H200 V240 H240 V200 H300"/>
+        <circle cx="140" cy="60" r="4" fill="#8A5A2A"/>
+        <circle cx="200" cy="60" r="4" fill="#8A5A2A"/>
+        <circle cx="320" cy="140" r="4" fill="#8A5A2A"/>
+        <circle cx="100" cy="300" r="4" fill="#8A5A2A"/>
+        <circle cx="220" cy="380" r="4" fill="#8A5A2A"/>
+        <rect x="230" y="220" width="30" height="16" rx="2"/>
+        <rect x="70" y="268" width="30" height="16" rx="2"/>
+        <rect x="280" y="380" width="30" height="16" rx="2"/>
+        <path d="M50 350 V380 H90 M90 380 V410"/>
+        <circle cx="50" cy="350" r="5"/>
+      </g>
+    </svg>
+
+    <div class="hero-quote">
+      <p>"Dedicated to turning ideas into circuits and circuits into solutions."</p>
+      <cite>— Personal Motto</cite>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <p class="stat-num">2<span>+</span></p>
+        <p class="stat-label">Work Roles</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-num">2<span>🏆</span></p>
+        <p class="stat-label">Prize-Winning Projects</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-num">IEEE</p>
+        <p class="stat-label">Conference Paper</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-num">NCC</p>
+        <p class="stat-label">C Certificate</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>A BE ECE graduate from Velalar College of Engineering and Technology (CGPA: 7.86) and working R&D Executive at Torque Lithium Energy Pvt Ltd, with a strong foundation in PCB design, embedded systems, and IoT development.</p>
+      <p>My experience spans designing custom PCBs in KiCad and Proteus, working as a Field Service Engineer, interning at SURE Trust, and presenting research at an IEEE-sponsored international conference. I bridge theory and real-world applications through hands-on project work — including two award-winning projects at national-level symposiums.</p>
+      <p>Beyond engineering, I am an NCC Cadet who has completed the C Certificate — with achievements in Group Level shooting camps — strengthening my discipline, leadership, and team collaboration skills.</p>
+    </div>
+    <div class="about-details">
+      <div class="detail-row">
+        <span class="detail-key">Name</span>
+        <span class="detail-val">Sanjeeth S</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Current Role</span>
+        <span class="detail-val">R&D Executive — Torque Lithium Energy Pvt Ltd, Dharmapuri</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Location</span>
+        <span class="detail-val">Erode, Tamil Nadu, India</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Education</span>
+        <span class="detail-val">B.E. ECE — Velalar College of Engineering and Technology (CGPA: 7.86) ✓ Completed</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Focus</span>
+        <span class="detail-val">PCB Design · Embedded Systems · IoT · Lithium Energy R&D</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Email</span>
+        <span class="detail-val"><a href="mailto:sanjeethsomu2004@gmail.com">sanjeethsomu2004@gmail.com</a></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">GitHub</span>
+        <span class="detail-val"><a href="https://github.com/Sanjeeth2311" target="_blank">github.com/Sanjeeth2311</a></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">LinkedIn</span>
+        <span class="detail-val"><a href="https://linkedin.com/in/sanjeeth-s-profile" target="_blank">linkedin.com/in/sanjeeth-s-profile</a></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Languages</span>
+        <span class="detail-val">Tamil (Native) · English (Proficient) · Japanese (Learning)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Skills &amp; Tools</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <p class="skill-cat-title">PCB Design</p>
+      <div class="skill-tags">
+        <span class="skill-tag">KiCad</span>
+        <span class="skill-tag">Proteus</span>
+        <span class="skill-tag">Circuit Design</span>
+        <span class="skill-tag">Schematic & Layout</span>
+        <span class="skill-tag">PCB Assembly</span>
+        <span class="skill-tag">Soldering</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <p class="skill-cat-title">Embedded & IoT</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Arduino IDE</span>
+        <span class="skill-tag">Wokwi Simulation</span>
+        <span class="skill-tag">Arduino Cloud</span>
+        <span class="skill-tag">ESP32 / ESP8266</span>
+        <span class="skill-tag">nRF24L01 (RF)</span>
+        <span class="skill-tag">GPS Modules</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <p class="skill-cat-title">Programming</p>
+      <div class="skill-tags">
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">Embedded C</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Register-Level Programming</span>
+        <span class="skill-tag">Sensor Integration</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <p class="skill-cat-title">Software & Tools</p>
+      <div class="skill-tags">
+        <span class="skill-tag">KiCad</span>
+        <span class="skill-tag">Proteus</span>
+        <span class="skill-tag">Canva</span>
+        <span class="skill-tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <p class="skill-cat-title">Hardware</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Electronics Hardware</span>
+        <span class="skill-tag">PC Building & Assembly</span>
+        <span class="skill-tag">CCTV Installation</span>
+        <span class="skill-tag">Hardware Troubleshooting</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <p class="skill-cat-title">Soft Skills</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Leadership</span>
+        <span class="skill-tag">Management</span>
+        <span class="skill-tag">Communication</span>
+        <span class="skill-tag">Teamwork</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <p class="project-num">Project — 01 · 🏆 First Prize</p>
+      <h3 class="project-title">Helmet Controlled Ignition System</h3>
+      <p class="project-desc">An embedded safety system that allows a vehicle's ignition to be controlled only when the rider wears a helmet — preventing accidents caused by helmetless driving. Won First Prize at Bannari Amman Institute of Technology.</p>
+      <div class="project-tags">
+        <span class="project-tag">Arduino</span>
+        <span class="project-tag">Embedded C</span>
+        <span class="project-tag">Sensors</span>
+        <span class="project-tag">PCB Design</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p class="project-num">Project — 02 · 🥈 Second Prize</p>
+      <h3 class="project-title">Helmet Controlled Ignition with Alcohol Detection</h3>
+      <p class="project-desc">An enhanced version adding alcohol detection to prevent drunk driving — the ignition is blocked if the rider is helmetless or intoxicated. Won Second Prize at Kongu Engineering College.</p>
+      <div class="project-tags">
+        <span class="project-tag">Arduino</span>
+        <span class="project-tag">MQ-3 Sensor</span>
+        <span class="project-tag">Embedded C</span>
+        <span class="project-tag">PCB Design</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p class="project-num">Project — 03 · IEEE Conference Paper</p>
+      <h3 class="project-title">Livestock Animal Tracking &amp; Health Monitoring System</h3>
+      <p class="project-desc">An IoT system to monitor the health parameters of livestock and track their real-time location using GPS and wireless communication. Research paper presented at IEEE Technically Sponsored iTech SECOM 2025, PSG Institute of Technology, Coimbatore.</p>
+      <div class="project-tags">
+        <span class="project-tag">ESP32</span>
+        <span class="project-tag">GPS</span>
+        <span class="project-tag">IoT</span>
+        <span class="project-tag">KiCad</span>
+        <span class="project-tag">Arduino Cloud</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p class="project-num">Project — 04</p>
+      <h3 class="project-title">Coal Mining Workers Safety &amp; Tunnel Monitoring</h3>
+      <p class="project-desc">A safety-critical embedded system for monitoring hazardous gases, temperature, and worker location inside coal mine tunnels. Uses sensor arrays and RF communication to alert safety personnel in real time.</p>
+      <div class="project-tags">
+        <span class="project-tag">nRF24L01</span>
+        <span class="project-tag">Sensors</span>
+        <span class="project-tag">Embedded C</span>
+        <span class="project-tag">PCB Design</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Experience &amp; Activities</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jan 2026 – Present</div>
+      <div class="timeline-content">
+        <p class="timeline-role">R&D Executive</p>
+        <p class="timeline-org">Torque Lithium Energy Pvt Ltd, Dharmapuri, Tamil Nadu</p>
+        <p class="timeline-desc">Currently working in the Research & Development division of a lithium energy company — contributing to the design, testing, and innovation of lithium battery systems and related electronics.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Oct 2025 – Present</div>
+      <div class="timeline-content">
+        <p class="timeline-role">PCB Design Intern</p>
+        <p class="timeline-org">SURE Trust</p>
+        <p class="timeline-desc">Gaining advanced PCB design experience under industry mentorship — working on real-world schematic design, layout, routing, and design-for-manufacturing best practices.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Dec 2023 – Aug 2025</div>
+      <div class="timeline-content">
+        <p class="timeline-role">Field Service Engineer (Part-Time)</p>
+        <p class="timeline-org">Sine Square Electronics, Tiruppur, Tamil Nadu</p>
+        <p class="timeline-desc">Provided field service support including installation, maintenance, and troubleshooting of electronic systems. Developed practical hardware skills including CCTV installation and PC assembly.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2022 – 2026</div>
+      <div class="timeline-content">
+        <p class="timeline-role">B.E. Electronics &amp; Communication Engineering ✓ Completed</p>
+        <p class="timeline-org">Velalar College of Engineering and Technology, Thindal</p>
+        <p class="timeline-desc">CGPA: 7.86. Studied core ECE subjects including circuit theory, microprocessors, VLSI, communication systems, and embedded systems — actively participated in technical symposiums, project exhibitions, and IEEE-sponsored conferences.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2024 – 2026</div>
+      <div class="timeline-content">
+        <p class="timeline-role">NCC Cadet — C Certificate ✓ Completed</p>
+        <p class="timeline-org">National Cadet Corps</p>
+        <p class="timeline-desc">Completed NCC with C Certificate — achievements include Group Level Selection Camp for IGC Shooting (Mar 2024), CATC cum TSC Selection Camp (May 2024), and Inter Group Shooting Competition (May 2025).</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro">Let's build something <em>remarkable</em> together.</p>
+      <p class="contact-text">Whether you're looking to collaborate on an embedded systems project, discuss PCB design, or just connect — I'd love to hear from you.</p>
+      <div class="contact-links">
+        <a class="contact-link-row" href="mailto:sanjeethsomu2004@gmail.com">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">sanjeethsomu2004@gmail.com</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a class="contact-link-row" href="https://github.com/Sanjeeth2311" target="_blank">
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-value">github.com/Sanjeeth2311</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a class="contact-link-row" href="https://linkedin.com/in/sanjeeth-s-profile" target="_blank">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/sanjeeth-s-profile</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <div class="contact-link-row" style="cursor:default;">
+          <span class="contact-link-label">Location</span>
+          <span class="contact-link-value">Erode, Tamil Nadu, India</span>
+          <span class="contact-link-arrow" style="color:var(--text-light)">📍</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" placeholder="John Doe"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="john@example.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell me about your project or inquiry..."></textarea>
+        </div>
+        <a href="mailto:sanjeethsomu2004@gmail.com" class="btn-primary" style="text-align:center; display:block;">Send Message</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Sanjeeth S</span>
+  <span class="footer-copy">© 2026 · PCB Designer & Embedded Systems Engineer</span>
+  <div class="footer-links">
+    <a href="https://github.com/Sanjeeth2311" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/sanjeeth-s-profile" target="_blank">LinkedIn</a>
+    <a href="mailto:sanjeethsomu2004@gmail.com">Email</a>
+  </div>
+</footer>
 
 </body>
 </html>
